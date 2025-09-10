@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_neat_and_clean_calendar/provider_image.dart';
+import "package:intl/intl.dart";
+
 // import 'package:flutter_neat_and_clean_calendar/platform_widgets.dart';
 import './date_utils.dart';
 import './neat_and_clean_calendar_event.dart';
-import "package:intl/intl.dart";
 
 /// [NeatCleanCalendarTile] is responsible for displaying one calendar event entry below
 /// the week view or the month view. The events are displayed in a list of [NeatCleanCalendarTile].
@@ -92,18 +93,19 @@ class NeatCleanCalendarTile extends StatelessWidget {
       return GestureDetector(
         onTap: onDateSelected, // react on tapping
         child: Padding(
-          padding: const EdgeInsets.all(1.0),
+          padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 1),
           child: Container(
             // If this tile is the selected date, draw a colored circle on it. The circle is filled with
             // the color passed with the selectedColor parameter or red color.
             decoration: isSelected && date != null
                 ? BoxDecoration(
-                    shape: BoxShape.circle,
+                    // shape: BoxShape,
+                    borderRadius: BorderRadius.circular(8),
                     color: selectedColor != null
                         ? Utils.isSameDay(this.date!, DateTime.now())
                             ? selectedTodayColor != null
                                 ? selectedTodayColor
-                                : Colors.red
+                                : Colors.deepPurple.shade400
                             : selectedColor
                         : Theme.of(context).primaryColor,
                     image: events != null && events!.isNotEmpty
@@ -119,7 +121,7 @@ class NeatCleanCalendarTile extends StatelessWidget {
                     ? BoxDecoration()
                     : events!.isNotEmpty
                         ? BoxDecoration(
-                            shape: BoxShape.circle,
+                            shape: BoxShape.rectangle,
                             image: icon != '' && icon != null
                                 ? DecorationImage(
                                     fit: BoxFit.cover,
@@ -168,10 +170,10 @@ class NeatCleanCalendarTile extends StatelessWidget {
                           return Container(
                             margin: EdgeInsets.only(
                                 left: 2.0, right: 2.0, top: 1.0),
-                            width: 5.0,
-                            height: 5.0,
+                            width: 12.0,
+                            height: 1.0,
                             decoration: BoxDecoration(
-                              shape: BoxShape.circle,
+                              shape: BoxShape.rectangle,
                               // If event is done (isDone == true) set the color of the dots to
                               // the eventDoneColor (if given) otherwise use the primary color of
                               // the theme
