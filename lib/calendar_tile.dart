@@ -93,7 +93,7 @@ class NeatCleanCalendarTile extends StatelessWidget {
       return GestureDetector(
         onTap: onDateSelected, // react on tapping
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 1),
+          padding: const EdgeInsets.symmetric(horizontal: 2.0, vertical: 1),
           child: Container(
             // If this tile is the selected date, draw a colored circle on it. The circle is filled with
             // the color passed with the selectedColor parameter or red color.
