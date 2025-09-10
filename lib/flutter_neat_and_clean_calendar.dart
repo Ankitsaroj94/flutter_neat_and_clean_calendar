@@ -907,48 +907,53 @@ class CalendarState extends State<Calendar> {
     return SimpleGestureDetector(
       onSwipeUp: _onSwipeUp,
       onSwipeDown: _onSwipeDown,
-      child: Container(
-        decoration: widget.boxDecoration,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            widget.headerChild ??
-                SizedBox.shrink(
-                  child: Text(currentMonth ?? ""),
-                ),
-            if (forceEventListView) ...[
-              eventlistView,
-              if (!_didScroll) ...[
-                // When the widget is built, a PostFrameCallback is added to scroll the widget
-                // after it has been built.
-                Builder(
-                  builder: (context) {
-                    WidgetsBinding.instance.addPostFrameCallback((_) {
-                      Future.delayed(Duration(milliseconds: 100), () {
-                        // Only execute the scroll to top, if the scroll
-                        // controller has clients (was properly attached to a
-                        // list view).
-                        if (_scrollController.hasClients) {
-                          resetToToday();
-                        }
-                      });
-                    });
-                    return Container();
-                  },
-                ),
-              ]
-            ] else ...[
-              ExpansionCrossFade(
-                collapsed: calendarGridView,
-                expanded: calendarGridView,
-                isExpanded: isExpanded,
-              ),
-              // expansionButtonRow,
-              // if (widget.showEvents) eventlistView
-            ],
-            Expanded(child: widget.child ?? SizedBox.shrink())
-          ],
-        ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          Container(
+            padding: EdgeInsets.only(bottom: 8),
+            decoration: widget.boxDecoration,
+            child: Column(
+              children: [
+                widget.headerChild ??
+                    SizedBox.shrink(
+                      child: Text(currentMonth ?? ""),
+                    ),
+                if (forceEventListView) ...[
+                  eventlistView,
+                  if (!_didScroll) ...[
+                    // When the widget is built, a PostFrameCallback is added to scroll the widget
+                    // after it has been built.
+                    Builder(
+                      builder: (context) {
+                        WidgetsBinding.instance.addPostFrameCallback((_) {
+                          Future.delayed(Duration(milliseconds: 100), () {
+                            // Only execute the scroll to top, if the scroll
+                            // controller has clients (was properly attached to a
+                            // list view).
+                            if (_scrollController.hasClients) {
+                              resetToToday();
+                            }
+                          });
+                        });
+                        return Container();
+                      },
+                    ),
+                  ]
+                ] else ...[
+                  ExpansionCrossFade(
+                    collapsed: calendarGridView,
+                    expanded: calendarGridView,
+                    isExpanded: isExpanded,
+                  ),
+                  // expansionButtonRow,
+                  // if (widget.showEvents) eventlistView
+                ],
+              ],
+            ),
+          ),
+          Expanded(child: widget.child ?? SizedBox.shrink())
+        ],
       ),
     );
   }
@@ -1076,7 +1081,7 @@ class CalendarState extends State<Calendar> {
             Expanded(
               flex: event.wide != null && event.wide! == true ? 25 : 5,
               child: Padding(
-                padding: const EdgeInsets.all(4.0),
+                padding: const EdgeInsets.all(8.0),
                 child: Container(
                   decoration: BoxDecoration(
                     // If no image is provided, use the color of the event.
@@ -1125,7 +1130,7 @@ class CalendarState extends State<Calendar> {
             Expanded(
               flex: 30,
               child: Padding(
-                padding: const EdgeInsets.all(4.0),
+                padding: const EdgeInsets.all(8.0),
                 // If the event is all day, then display the word "All day" with no time.
                 child: event.isAllDay || event.isMultiDay
                     ? allOrMultiDayDayTimeWidget(event)
