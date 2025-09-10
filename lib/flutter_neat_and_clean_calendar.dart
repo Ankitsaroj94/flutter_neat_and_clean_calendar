@@ -644,8 +644,8 @@ class CalendarState extends State<Calendar> {
       child: SimpleGestureDetector(
         // onSwipeUp: _onSwipeUp,
         // onSwipeDown: _onSwipeDown,
-        onSwipeLeft: _onSwipeLeft,
-        onSwipeRight: _onSwipeRight,
+        onSwipeLeft: onSwipeLeft,
+        onSwipeRight: onSwipeRight,
         swipeConfig: SimpleSwipeConfig(
           verticalThreshold: 10.0,
           horizontalThreshold: 40.0,
@@ -905,8 +905,8 @@ class CalendarState extends State<Calendar> {
       });
     }
     return SimpleGestureDetector(
-      onSwipeUp: _onSwipeUp,
-      onSwipeDown: _onSwipeDown,
+      onSwipeUp: onSwipeUp,
+      onSwipeDown: onSwipeDown,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
@@ -1285,15 +1285,16 @@ class CalendarState extends State<Calendar> {
     });
   }
 
-  void _onSwipeUp() {
+  void onSwipeUp() {
     if (isExpanded) toggleExpanded();
   }
 
-  void _onSwipeDown() {
+// FIXME: fix swipe up
+  void onSwipeDown() {
     if (!isExpanded) toggleExpanded();
   }
 
-  void _onSwipeRight() {
+  void onSwipeRight() {
     if (isExpanded) {
       // Here _launchDateSelectionCallback was not called before. That's why set the
       // "launchCallback" parameter to true.
@@ -1303,7 +1304,7 @@ class CalendarState extends State<Calendar> {
     }
   }
 
-  void _onSwipeLeft() {
+  void onSwipeLeft() {
     if (isExpanded) {
       // Here _launchDateSelectionCallback was not called before. That's why set the
       // "launchCallback" parameter to true.
