@@ -205,6 +205,7 @@ class Calendar extends StatefulWidget {
       this.showEventListViewIcon = true,
       this.showEvents = true,
       this.child,
+      super.key,
       this.headerChild,
       this.boxDecoration});
 
